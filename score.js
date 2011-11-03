@@ -57,10 +57,15 @@ var Score = {
                 else if(notches >= 6 && notches <= 10) {
                     total = total + this.point_row_values[row];
                 }
-
             }
         }
-        console.log(total);
+
+        return total;
+    },
+
+    reset: function() {
+        this.death_row_counts = {};
+        this.point_row_counts = {};
     },
 };
 
@@ -77,4 +82,7 @@ Score.add_point_notch("12");
 Score.add_point_notch("12");
 Score.add_point_notch("12");
 
-Score.get_score();
+console.log( Score.get_score() );
+
+Score.reset();
+console.log( Score.get_score() );
