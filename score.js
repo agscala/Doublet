@@ -46,7 +46,7 @@ var Score = {
 
         for(var row in this.point_row_counts) {
             if(this.point_row_counts.hasOwnProperty(row)) {
-                console.log(row);
+
                 var notches = this.point_row_counts[row];
 
                 if(notches <= 4) {
