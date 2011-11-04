@@ -2,24 +2,28 @@
 
 <head>
 
-<script type = 'text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
-<script type = 'text/javascript' src = dice.js'></script>
+<script type = "text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type = "text/javascript" src = "dice.js"></script>
 
 <style type = 'text/css'>
 .form
 {
-	text-align: center;
+	text-align	: center;
+	width		: 350px;
+	border		: #000 solid 2px;
 }
 
 .dice
 {
-	width			: 40px;
-	height 			: 40px;
-	float 			: left;
-	align				: center;
-	border			: #000 solid 4px;
-	margin			: 10px;
-	background	: red;
+	width				: 40px;
+	height 				: 40px;
+	float 				: left;
+	align					: center;
+	margin				: 10px;
+	border-color		: #000000;
+	border-style		: solid;
+	border-width		: 4px;
+	background		: red;
 }
 
 p
@@ -29,40 +33,63 @@ p
 	font-size		: 26px;
 }
 
-.roll { float	: left; }
+.button 
+{ 
+	width				: 80px;
+	border				: #000 solid 2px;
+	margin-left 		: 128px;
+	margin-bottom : 10px;
+}
+
+.pairs
+{
+	width	: 350px;
+	height	: 60px;
+	border	: #000 dashed 2px;
+}
 </style>
+
+
 </head>
 
 <body>
 <div class = 'form'>
 
-
-<div class = 'dice'>
+<div id='0' class = 'dice'>
 	<p></p>
 </div>
 
-<div class = 'dice'>
+<div id='1' class = 'dice'>
 	<p></p>
 </div>
 
-<div class = 'dice'>
+<div id='2' class = 'dice'>
 	<p></p>
 </div>
 
-<div class = 'dice'>
+<div id='3' class = 'dice'>
 	<p></p>
 </div>
 
-<div class = 'dice'>
+<div id='4' class = 'dice'>
 	<p></p>
-</div>
-
 </div>
 
 <br/><br/>
 <br/><br/>
-<div class = 'roll'>
-	<input id = 'roll', type= 'submit', value = 'Roll'/>
+<div>
+	<div class = 'button'>
+		<p id = 'roll'>Roll</p>
+	</div>
+	<div class = 'button' enabled = 'false'>
+		<p id='pair'>Pair</p>
+	</div>
 </div>
+</div>
+
+<p><b>Pairs</b></p>
+<div class = 'pairs'></div>
+
+<label id = 'values'/>
 </body>
 </html>
