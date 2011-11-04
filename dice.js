@@ -31,11 +31,11 @@ function clearUISelection()
 
 function setUISelection()
 {
-	var iter = 0;
-	
-	$('.dice > p').each( function() { 
-		$(this).text( Dice.allDice[ iter++ ].value ); 
-	});
+    for ( i = 0; i < Dice.allDice.length; ++i )
+    {
+        var diceDiv = '#' + i + '>p';
+        $(diceDiv).text( Dice.allDice[i].value );
+    }
 }
 
 function setUIPair( pair )
@@ -84,17 +84,23 @@ var Dice = {
 	clearPair: function( diceInfo )
 	{
         if ( diceInfo.pair.length == 2 )
+        {
+            diceInfo.pair[0] + diceInfo.pair[1] == this.pairTotals[0] ?
+                this.pairTotals[0] = 0 :
+                this.pairTotals[1] = 0;
+                
             splitUIPair( diceInfo.pair );
+        }
         
         diceInfo.pair.splice( diceInfo.index, 1 );
 	},
 	
 	getValue: function( pair, pairID )
 	{
-        /*this.pairTotals[ pairID ] = 0;
+        this.pairTotals[ pairID ] = 0;
         
         for ( i = 0; i < pair.length; ++i )
-            this.pairTotals[ pairID ] += pair[i].value;*/
+            this.pairTotals[ pairID ] += pair[i].value;
             
         setUIPair( pair );
 	},
@@ -161,7 +167,7 @@ var Dice = {
 	
 	clearDice: function()
 	{
-        //this.pairTotals = [0,0];
+        this.pairTotals = [0,0];
 		clearUISelection();
 		
 		this.allDice    = [];
