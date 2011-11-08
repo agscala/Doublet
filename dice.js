@@ -1,178 +1,158 @@
 $(document).ready( function() {
 
-	$('#roll').click( function() {
-		Dice.roll();
-	});
-    
+    $('#roll').click( function() {
+        Dice.roll();
+        setDiceValuesUI();
+        updateUI();
+    });
+   
+    $('.dice').click( function() {
+        var dice = Dice.allDice[ $(this).attr( 'id' ) ];
+        
+        if ( Dice.pair1.length != 2 || Dice.pair2.length != 2 || dice.selected )
+        {
+            Dice.toggle( dice );
+            updateUI();
+        }
+    });
+ 
     $('#pair').click( function() {
         if ( Dice.pair1.length == 2 && Dice.pair2.length == 2 )
             Dice.evaluatePairs();
-	});
+    });
 	
-	$('.dice').click( function() {
-		var selected = Dice.toggle( $(this).attr( 'id' ) );
-		
-		if ( selected )
-			$(this).css( 'border-color', '#F0F0FF' );
-		else $(this).css( 'border-color', '#000000' );
-	});
-
 });
 
-function clearUISelection()
+function updateUI()
 {
-    splitUIPair( Dice.pair1 );
-    splitUIPair( Dice.pair2 );
+    for ( var i = 0, l = Dice.allDice.length; i < l; ++i )
+    {
+        var diceElem = '#' + Dice.allDice[i].id;
+        
+        if ( Dice.allDice[i].pairID != -1 )
+        {
+            $(diceElem).css( 'border-color', '#ACF0BF' );
+            
+            if ( !$('.pairs >' + diceElem).length )
+                $(diceElem).appendTo( '#pair' + Dice.allDice[i].pairID );
+        }
+        else 
+        {
+            $(diceElem).css( 'border-color', '#000000' );
+            
+            if ( !$('.form >' + diceElem).length )
+                $(diceElem).prependTo( '.form');
+        }
+    }
     
-	$('.dice').each( function() {
-		$(this).css( 'border-color', '#000000' );
-	});
+    $('#values').text( 'Pair 1: ' + Dice.pairTotals[0] + '   Pair 2: ' + Dice.pairTotals[1] );
 }
 
-function setUISelection()
+function setDiceValuesUI()
 {
-    for ( i = 0; i < Dice.allDice.length; ++i )
+    for ( var i = 0, l = Dice.allDice.length; i < l; ++i )
     {
         var diceDiv = '#' + i + '>p';
         $(diceDiv).text( Dice.allDice[i].value );
     }
 }
 
-function setUIPair( pair )
-{
-    for ( i = 0; i < pair.length; ++i )
-        $('#' +pair[i].id).appendTo( '.pairs' ).css( 'border-color', '#F0F0FF' );
-        
-    $('#values').text( 'Pair 1: ' + Dice.pairTotals[0] + '   Pair 2: ' + Dice.pairTotals[1] );
-}
-
-function splitUIPair( pair )
-{
-    for ( i = 0; i < pair.length; ++i )
-    {
-        pair[i].selected ?
-            $( '#'+pair[i].id ).prependTo( '.form ' ).css( 'border-color', '#F0F0FF' ) :
-            $( '#'+pair[i].id ).prependTo( '.form' ).css( 'border-color', '#000000' );
-    }
-            
-    $('#values').text( 'Pair 1: ' + Dice.pairTotals[0] + '   Pair 2: ' + Dice.pairTotals[1] );
-}
-
 var Dice = {
-	allDice	    : [],
-	pair1	    : [],
-	pair2       : [],
+    allDice     : [],
+    pair1       : [],
+    pair2       : [],
     pairTotals  : [0,0],
-	paired      : 0,
+    paired      : 0,
 	
-	gameDice: function( val, diceID )
-	{
-		var gameDice = {
-			value		: val,
-			selected	: false,
-			id		    : diceID,
-		};
-        
-		this.allDice.push( gameDice );
-	},
+    gameDice: function( val, diceID )
+    {
+        var gameDice = {
+            value       : val,
+            selected    : false,
+            id          : diceID,
+            pairID      : -1
+        };
+
+        this.allDice.push( gameDice );
+    },
     
     evaluatePairs: function()
     {
-        /* hook into Score Class */
+        /* Finalizes pairs, hooks into Score Class */
     },
 	
-	clearPair: function( diceInfo )
-	{
-        if ( diceInfo.pair.length == 2 )
+    clearPair: function( pairID )
+    {
+        var pair = pairID == 0 ? this.pair1 : this.pair2;
+        
+        for ( var i = 0, l = pair.length; i < l; ++i )
         {
-            diceInfo.pair[0] + diceInfo.pair[1] == this.pairTotals[0] ?
-                this.pairTotals[0] = 0 :
-                this.pairTotals[1] = 0;
-                
-            splitUIPair( diceInfo.pair );
+            pair[i].selected = false;
+            pair[i].pairID = -1;
+            this.paired--;
         }
         
-        diceInfo.pair.splice( diceInfo.index, 1 );
-	},
-	
-	getValue: function( pair, pairID )
-	{
         this.pairTotals[ pairID ] = 0;
-        
-        for ( i = 0; i < pair.length; ++i )
-            this.pairTotals[ pairID ] += pair[i].value;
-            
-        setUIPair( pair );
-	},
-    
-    findDiceInPairs: function( dice )
-    {
-        for ( i = 0; i < this.pair1.length; ++i )
-            if ( dice.id == this.pair1[i].id )
-                return { pair : this.pair1, id : dice.id, index : this.pair1.indexOf( dice ) };
-
-        for ( i = 0; i < this.pair2.length; ++i )
-            if ( dice.id == this.pair2[i].id )
-                return { pair : this.pair2, id : dice.id, index : this.pair2.indexOf( dice ) };
+        pairID == 0 ? this.pair1 = [] : this.pair2 = [];
     },
 	
-	toggle: function( diceID )
-	{
-        var dice = this.allDice[ diceID ];
-		var toggled = !dice.selected;
-		dice.selected = toggled;
-        
-		if ( toggled )
-		{
-            if ( this.pair1.length == 2 && this.pair2.length == 2 )
-            {
-                dice.selected = false;
-                return false;
-            }
+    updateScore: function()
+    {
+        this.pairTotals[0] = 0;
+        this.pairTotals[1] = 0;
+
+        for ( var i = 0, l = this.pair1.length; i < l; ++i )
+            this.pairTotals[0] += this.pair1[i].value;
             
+        for ( var i = 0, l = this.pair2.length; i < l; ++i )
+            this.pairTotals[1] += this.pair2[i].value;
+    },
+    
+    toggle: function( dice )
+    {
+        dice.selected = !dice.selected;
+
+        if ( dice.selected )
+        {
             this.paired++;
-			
-            if ( this.pair1.length < 2 )
-                this.pair1.push( dice );
-            else if ( this.pair2.length < 2 )
-                this.pair2.push( dice );
-            
-            if ( this.pair1.length == 2 )
-                this.getValue( this.pair1, 0 );
-            if ( this.pair2.length == 2 )
-                this.getValue( this.pair2, 1 );
-		}
-		else
-		{
-            var diceInfo = this.findDiceInPairs( dice );
-			this.paired--;
-            this.clearPair( diceInfo );
-		}
-		
-		return toggled;
-	},
-	
-	roll: function()
-	{
-		this.clearDice();
+            this.insertInPair( dice );
+        }
+        else this.clearPair( dice.pairID );
         
-		for ( diceID = 0; diceID < 5; ++diceID )
-		{
-			var value = Math.floor( Math.random()*6 + 1 );
-			this.gameDice( value, diceID );
-		}
-		
-		setUISelection();
-	},
+        this.updateScore();
+    },
+    
+    insertInPair: function( dice )
+    {
+        if ( this.pair1.length < 2 )
+        {
+            this.pair1.push( dice );
+            dice.pairID = 0;
+        }
+        else if ( this.pair2.length < 2 )
+        {
+            this.pair2.push( dice );
+            dice.pairID = 1;
+        }
+    },
 	
-	clearDice: function()
-	{
-        this.pairTotals = [0,0];
-		clearUISelection();
-		
-		this.allDice    = [];
-		this.pair1	    = [];
-		this.pair2	    = [];
-		this.paired	    = 0;
-	},
+    roll: function()
+    {
+        this.setNewRound();
+
+        for ( var diceID = 0; diceID < 5; ++diceID )
+        {
+            var value = Math.floor( Math.random()*6 + 1 );
+            this.gameDice( value, diceID );
+        }
+    },
+	
+    setNewRound: function()
+    {
+        Dice.pairTotals = [0,0];
+        this.allDice    = [];
+        this.pair1      = [];
+        this.pair2      = [];
+        this.paired     = 0;
+    },
 };
