@@ -8,44 +8,54 @@
 <style type = 'text/css'>
 .form
 {
-	text-align	: center;
-	width		: 350px;
-	border		: #000 solid 2px;
+    text-align  : center;
+    width       : 350px;
+    border      : #000 solid 2px;
 }
 
 .dice
 {
-	width				: 40px;
-	height 				: 40px;
-	float 				: left;
-	align					: center;
-	margin				: 10px;
-	border-color		: #000000;
-	border-style		: solid;
-	border-width		: 4px;
-	background		: red;
+    width           : 40px;
+    height          : 40px;
+    float           : left;
+    align           : center;
+    margin          : 10px;
+    border-color    : #000000;
+    border-style    : solid;
+    border-width    : 4px;
+    background      : red;
 }
 
 p
 {
-	margin			: 5px;
-	font-family	: "Times New Roman", Times, serif;
-	font-size		: 26px;
+    margin      : 5px;
+    font-size   : 26px;
+    font-family : "Times New Roman", Times, serif;
 }
 
 .button 
 { 
-	width				: 80px;
-	border				: #000 solid 2px;
-	margin-left 		: 128px;
-	margin-bottom : 10px;
+    width               : 80px;
+    border              : #000 solid 2px;
+    margin-left         : 128px;
+    margin-bottom       : 10px;
 }
 
 .pairs
 {
-	width	: 350px;
-	height	: 60px;
-	border	: #000 dashed 2px;
+    width   : 160px;
+    height  : 60px;
+    border  : #000 dashed 2px;
+}
+
+.shit { width:350px; }
+
+#pair0 { float: left; }
+
+#pair1
+{
+    float: right;
+    margin-left: 22px;
 }
 </style>
 
@@ -53,43 +63,46 @@ p
 </head>
 
 <body>
-<div class = 'form'>
+<div class='form'>
 
-<div id='0' class = 'dice'>
-	<p></p>
+<div id='0' class='dice'>
+    <p></p>
 </div>
 
-<div id='1' class = 'dice'>
-	<p></p>
+<div id='1' class='dice'>
+    <p></p>
 </div>
 
-<div id='2' class = 'dice'>
-	<p></p>
+<div id='2' class='dice'>
+    <p></p>
 </div>
 
-<div id='3' class = 'dice'>
-	<p></p>
+<div id='3' class='dice'>
+    <p></p>
 </div>
 
-<div id='4' class = 'dice'>
-	<p></p>
+<div id='4' class='dice'>
+    <p></p>
 </div>
 
 <br/><br/>
 <br/><br/>
 <div>
-	<div class = 'button'>
-		<p id = 'roll'>Roll</p>
-	</div>
-	<div class = 'button' enabled = 'false'>
-		<p id='pair'>Pair</p>
-	</div>
+    <div class='button'>
+        <p id='roll'>Roll</p>
+    </div>
+    <div class='button' enabled='false'>
+        <p id='pair'>Pair</p>
+    </div>
 </div>
 </div>
 
 <p><b>Pairs</b></p>
-<div class = 'pairs'></div>
+<div class='shit'>
+    <div id='pair0' class='pairs'></div>
+    <div id='pair1' class='pairs'></div>
+</div>
 
-<label id = 'values'/>
+<label id='values'/>
 </body>
 </html>
