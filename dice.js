@@ -18,7 +18,7 @@ $(document).ready( function() {
  
     $('#pair').click( function() {
         if ( Dice.pair1.length == 2 && Dice.pair2.length == 2 )
-            Dice.evaluatePairs();
+            Dice.scorePairs();
     });
 	
 });
@@ -76,7 +76,7 @@ var Dice = {
         this.allDice.push( gameDice );
     },
     
-    evaluatePairs: function()
+    scorePairs: function()
     {
         /* Finalizes pairs, hooks into Score Class */
     },
@@ -96,7 +96,7 @@ var Dice = {
         pairID == 0 ? this.pair1 = [] : this.pair2 = [];
     },
 	
-    updateScore: function()
+    updatePairTotals: function()
     {
         this.pairTotals[0] = 0;
         this.pairTotals[1] = 0;
@@ -119,7 +119,7 @@ var Dice = {
         }
         else this.clearPair( dice.pairID );
         
-        this.updateScore();
+        this.updatePairTotals();
     },
     
     insertInPair: function( dice )
