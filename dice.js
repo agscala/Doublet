@@ -62,7 +62,6 @@ var Dice = {
     pair1       : [],
     pair2       : [],
     pairTotals  : [0,0],
-    paired      : 0,
 	
     gameDice: function( val, diceID )
     {
@@ -89,7 +88,6 @@ var Dice = {
         {
             pair[i].selected = false;
             pair[i].pairID = -1;
-            this.paired--;
         }
         
         this.pairTotals[ pairID ] = 0;
@@ -112,12 +110,9 @@ var Dice = {
     {
         dice.selected = !dice.selected;
 
-        if ( dice.selected )
-        {
-            this.paired++;
-            this.insertInPair( dice );
-        }
-        else this.clearPair( dice.pairID );
+        dice.selected ?
+            this.insertInPair( dice ) :
+            this.clearPair( dice.pairID );
         
         this.updatePairTotals();
     },
@@ -153,6 +148,5 @@ var Dice = {
         this.allDice    = [];
         this.pair1      = [];
         this.pair2      = [];
-        this.paired     = 0;
     },
 };
