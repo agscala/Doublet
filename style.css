@@ -1,0 +1,111 @@
+/* General */
+#game-wrapper {
+    width: 480px;
+    height: 800px;
+
+    border: 10px ridge #AAA;
+}
+
+/* Death Row Area */
+#death-rows-wrapper {
+    background-color: #F0F0F0;
+}
+
+.death-row-notch,
+.death-row-die {
+    display: inline-block;
+    width: 20px;
+    height: 20px;href="style.css"/>
+}
+
+.death-row-die {
+    outline: 1px solid black;
+}
+
+.death-row-notch {
+    outline: 1px solid red;
+}
+
+/* Dice Area */
+#dice-wrapper {
+    background-color: #F4F4F4;
+    height: 100px;
+}
+
+/* Point Row Area */
+#point-rows-wrapper {
+    position: relative;
+    background-color: #F8F8F8;
+}
+
+#current-score {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+}
+
+.point-row-number,
+.point-notch-negative,
+.point-notch-zero,
+.point-notch-2,
+.point-notch-3,
+.point-notch-4,
+.point-notch-5,
+.point-notch-6,
+.point-notch-7,
+.point-notch-8,
+.point-notch-9,
+.point-notch-10,
+.point-notch-11,
+.point-notch-12 {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+}
+
+.point-notch-negative {
+    outline: 1px solid red;
+}
+
+.point-notch-zero {
+    outline: 1px solid black;
+}
+
+.point-notch-2,
+.point-notch-3,
+.point-notch-4,
+.point-notch-5,
+.point-notch-6,
+.point-notch-7,
+.point-notch-8,
+.point-notch-9,
+.point-notch-10,
+.point-notch-11,
+.point-notch-12 {
+    outline: 1px solid green;
+}
+
+.point-notch-10 {
+    width: 30px;
+}
+
+.point-notch-7 {
+    width: 21px;
+}
+
+.point-notch-6 {
+    width: 18px;
+}
+
+.point-notch-5 {
+    width: 15px;
+}
+
+.point-notch-4 {
+    width: 12px;
+}
+
+.point-notch-3 {
+    width: 9px;
+}
+
