@@ -60,15 +60,20 @@
 .point-notch-12 {
     display: inline-block;
     height: 20px;
+}
+
+.point-row-number {
     width: 20px;
 }
 
 .point-notch-negative {
     outline: 1px solid red;
+    width: 12px;
 }
 
 .point-notch-zero {
     outline: 1px solid black;
+    width: 20px;
 }
 
 .point-notch-2,
@@ -107,5 +112,17 @@
 
 .point-notch-3 {
     width: 9px;
+}
+
+.negative-filled {
+    background-color: red;
+}
+
+.zero-filled {
+    background-color: black;
+}
+
+.positive-filled {
+    background-color: green;
 }
 
