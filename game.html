@@ -1,5 +1,7 @@
 <html>
 <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="dice.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
@@ -42,6 +44,43 @@
     </div>
 
     <div id="dice-wrapper">
+        <div class='form'>
+        <div id='0' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='1' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='2' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='3' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='4' class='dice'>
+            <p></p>
+        </div>
+
+        <br/><br/>
+        <br/><br/>
+        <div>
+            <div class='button'>
+                <p id='rollPair'>Roll</p>
+            </div>
+        </div>
+        </div>
+
+        <p><b>Pairs</b></p>
+        <div class='shit'>
+            <div id='pair0' class='pairs'></div>
+            <div id='pair1' class='pairs'></div>
+        </div>
+
+        <label id='values'/>
     </div>
 
     <div id="point-rows-wrapper">
