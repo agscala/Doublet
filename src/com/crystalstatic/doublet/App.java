@@ -1,4 +1,4 @@
-package com.twodudes.dicegame;
+package com.crystalstatic.doublet;
 
 import android.os.Bundle;
 import com.phonegap.*;
