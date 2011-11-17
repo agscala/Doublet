@@ -13,7 +13,7 @@ $(document).ready( function() {
     });
    
     $('.dice').click( function() {
-        var dice = Dice.allDice[ $(this).attr( 'id' ) ];
+        var dice = Dice.allDice[ $(this).attr( 'id' ).match(/\d+/)[0] ];
         
         if ( Dice.pair1.length !== 2 || Dice.pair2.length !== 2 || dice.selected ) {
             Dice.toggle( dice );
@@ -25,20 +25,20 @@ $(document).ready( function() {
 
 function updateUI() {
     for ( var i = 0, l = Dice.allDice.length; i < l; ++i ) {
-        var diceElem = '#' + Dice.allDice[i].id;
+        var diceElem = '#die-' + Dice.allDice[i].id;
         
         if ( Dice.allDice[i].pairID !== -1 ) {
             $(diceElem).css( 'border-color', '#ACF0BF' );
             
-            if ( !$('.pairs >' + diceElem).length ) {
-                $(diceElem).appendTo( '#pair' + Dice.allDice[i].pairID );
+            if ( !$('.pairs-wrapper ' + diceElem).length ) {
+                $(diceElem).appendTo( '#pair-' + Dice.allDice[i].pairID );
             }
         }
         else {
             $(diceElem).css( 'border-color', '#000000' );
             
-            if ( !$('.form >' + diceElem).length ) {
-                $(diceElem).prependTo( '.form');
+            if ( !$('#dice-wrapper >' + diceElem).length ) {
+                $(diceElem).prependTo( '#dice-wrapper');
             }
         }
     }
@@ -52,7 +52,7 @@ function updateUI() {
 
 function setDiceValuesUI() {
     for ( var i = 0, l = Dice.allDice.length; i < l; ++i ) {
-        var diceDiv = '#' + i + '>p';
+        var diceDiv = '#die-' + i + '>p';
         $(diceDiv).text( Dice.allDice[i].value );
     }
     
