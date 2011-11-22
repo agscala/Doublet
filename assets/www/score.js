@@ -63,26 +63,14 @@ var Score = {
         return total;
     },
 
+    score_pairs: function() {
+        this.add_point_notch( Dice.pairTotals[0] );
+        this.add_point_notch( Dice.pairTotals[1] );
+        this.add_death_notch( Dice.getLoneDice() );
+    },
+    
     reset: function() {
         this.death_row_counts = {};
         this.point_row_counts = {};
     },
 };
-
-Score.add_death_notch("1");
-Score.add_death_notch("2");
-Score.add_death_notch("3");
-Score.add_death_notch("4");
-Score.add_death_notch("4");
-
-Score.add_point_notch("1");
-Score.add_point_notch("2");
-Score.add_point_notch("12");
-Score.add_point_notch("12");
-Score.add_point_notch("12");
-Score.add_point_notch("12");
-
-console.log( Score.get_score() );
-
-Score.reset();
-console.log( Score.get_score() );

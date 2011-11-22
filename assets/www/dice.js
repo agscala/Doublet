@@ -1,64 +1,3 @@
-$(document).ready( function() {
-
-    $('#rollPair').click( function() {
-        if ( $(this).text() === 'Roll' ) {
-            Dice.roll();
-            setDiceValuesUI();
-            updateUI();
-        }
-        else if ( Dice.pair1.length === 2 && Dice.pair2.length === 2 ){
-            Dice.scorePairs();
-            $('#rollPair').text( 'Roll' )
-        }
-    });
-   
-    $('.dice').click( function() {
-        var dice = Dice.allDice[ $(this).attr( 'id' ).match(/\d+/)[0] ];
-        
-        if ( Dice.pair1.length !== 2 || Dice.pair2.length !== 2 || dice.selected ) {
-            Dice.toggle( dice );
-            updateUI();
-        }
-    });
-	
-});
-
-function updateUI() {
-    for ( var i = 0, l = Dice.allDice.length; i < l; ++i ) {
-        var diceElem = '#die-' + Dice.allDice[i].id;
-        
-        if ( Dice.allDice[i].pairID !== -1 ) {
-            $(diceElem).css( 'border-color', '#ACF0BF' );
-            
-            if ( !$('.pairs-wrapper ' + diceElem).length ) {
-                $(diceElem).appendTo( '#pair-' + Dice.allDice[i].pairID );
-            }
-        }
-        else {
-            $(diceElem).css( 'border-color', '#000000' );
-            
-            if ( !$('#dice-wrapper >' + diceElem).length ) {
-                $(diceElem).prependTo( '#dice-wrapper');
-            }
-        }
-    }
-    
-    if ( Dice.pair1.length === 2 && Dice.pair2.length === 2 ) {
-        $('#rollPair').removeAttr( 'disabled' );
-    }
-    
-    $('#values').text( 'Pair 1: ' + Dice.pairTotals[0] + '   Pair 2: ' + Dice.pairTotals[1] );
-}
-
-function setDiceValuesUI() {
-    for ( var i = 0, l = Dice.allDice.length; i < l; ++i ) {
-        var diceDiv = '#die-' + i + '>p';
-        $(diceDiv).text( Dice.allDice[i].value );
-    }
-    
-    $('#rollPair').text( 'Score' );
-}
-
 var Dice = {
     allDice     : [],
     pair1       : [],
@@ -144,9 +83,5 @@ var Dice = {
                 return this.allDice[i].value;
             }
         }
-    },
-    
-    scorePairs: function() {
-        /* Finalizes pairs, hooks into Score Class */
     },
 };
