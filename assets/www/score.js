@@ -17,7 +17,7 @@ var Score = {
     },
 
     add_death_notch: function(dice_number) {
-        if(Object.keys(this.death_row_counts).length < 3)
+        if(this.get_death_row_length() !== 3 && !(dice_number.toString() in this.death_row_counts))
         {
             this.death_row_counts[dice_number.toString()] = 0;
         }
@@ -39,6 +39,18 @@ var Score = {
 
             this.point_row_counts[pair_value.toString()] = notch_count + 1;
         }
+    },
+
+    get_death_row_length: function() {
+        var count = 0;
+        
+        for ( var k in this.death_row_counts ) {
+            if ( this.death_row_counts.hasOwnProperty(k) ) {
+               ++count;
+            }
+        }
+        
+        return count;
     },
 
     get_score: function() {

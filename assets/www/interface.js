@@ -56,6 +56,14 @@ var UI = {
     },
     
     updateScore: function() {
+        var score = Score.get_score();
+        
+        this.updatePointNotches();
+        this.updateDeathNotch( Dice.getLoneDice() );
+        $("#current-score").html(score);
+    },
+    
+    updatePointNotches: function() {
         var offset = Dice.pairTotals[0] === Dice.pairTotals[1] ? 1 : 0;
         
         for ( var i = 0; i < 2; ++i ) {
@@ -66,9 +74,23 @@ var UI = {
             this.fillNotch( pointNotch, notchType );
             offset = 0;
         }
-
-		var score = Score.get_score();
-		$("#current-score").html(score);
+    },
+    
+    updateDeathNotch: function( dice ) {
+        if ( Score.is_death_number( dice ) ) {
+            if ( Score.death_row_counts[ dice.toString() ] === 1 ) {
+                $('.death-row-die').each( function() {
+                    if ( !$(this).text() ) {
+                        $(this).text( dice );
+                        return false;
+                    }
+                });
+            }
+            
+            var deathRow     = '.death-row-die:contains(' + dice + ')';
+            var emptyNotches = '~.death-row-notch:not(.negative-filled)';
+            $(deathRow+emptyNotches).filter( ':first' ).addClass( 'negative-filled' );
+        }
     },
     
     fillNotch: function( pointNotch, notchType ) {
@@ -80,3 +102,4 @@ var UI = {
         }
     },
 };
+
