@@ -66,6 +66,9 @@ var UI = {
             this.fillNotch( pointNotch, notchType );
             offset = 0;
         }
+
+		var score = Score.get_score();
+		$("#current-score").html(score);
     },
     
     fillNotch: function( pointNotch, notchType ) {
