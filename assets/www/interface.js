@@ -1,6 +1,28 @@
 $(document).ready( function() {
 
-    $('#rollPair').click( function() {
+    $('#rollPair').on( 'touchStart', function(event) {
+        if ( $(this).text() === 'Roll' ) {
+            Dice.roll();
+            UI.setDiceValues();
+            UI.updateDice();
+        }
+        else if ( Dice.pair1.length === 2 && Dice.pair2.length === 2 ){
+            Score.score_pairs();
+            UI.updateScore();
+            $('#rollPair').text( 'Roll' )
+        }
+    });
+    
+    $('.dice').on( 'touchStart', function(event) {
+        var dice = Dice.allDice[ $(this).attr( 'id' ).match(/\d+/)[0] ];
+        
+        if ( Dice.pair1.length !== 2 || Dice.pair2.length !== 2 || dice.selected ) {
+            Dice.toggle( dice );
+            UI.updateDice();
+        }
+    });
+    
+    /*$('#rollPair').click( function() {
         if ( $(this).text() === 'Roll' ) {
             Dice.roll();
             UI.setDiceValues();
@@ -20,8 +42,8 @@ $(document).ready( function() {
             Dice.toggle( dice );
             UI.updateDice();
         }
-    });
-	
+    });*/
+
 });
 
 var UI = {
@@ -87,9 +109,8 @@ var UI = {
                 });
             }
             
-            var deathRow     = '.death-row-die:contains(' + dice + ')';
-            var emptyNotches = '~.death-row-notch:not(.negative-filled)';
-            $(deathRow+emptyNotches).filter( ':first' ).addClass( 'negative-filled' );
+            var deathNotches = '.death-row-die:contains(' + dice + ') ~ :not(.negative-filled)';
+            $(deathNotches).filter( ':first' ).addClass( 'negative-filled' );
         }
     },
     
