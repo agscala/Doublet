@@ -1,0 +1,8 @@
+<h1>Doublet</h1>
+<p>High Score: {{ high_score }}</p>
+
+<button ng-click="new_game()">New Game</button>
+
+<div ng-show="game_in_progress">
+    <button ng-click="continue_game()">Continue Game ({{ current_score }})</button>
+</div>
