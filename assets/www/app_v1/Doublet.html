@@ -1,0 +1,268 @@
+<html>
+<head>
+    <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+    <script type="text/javascript" src="jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="angular-1.0.4.min.js"></script>
+    <script type="text/javascript" src="dice.js"></script>
+    <script type="text/javascript" src="score.js"></script>
+    <script type="text/javascript" src="interface.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+
+<div id="game-wrapper">
+    <div id="death-rows-wrapper">
+        <div class="death-row" id="death-row-1">
+            <div class="death-row-die"></div>
+
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+        </div>
+        <div class="death-row" id="death-row-2">
+            <div class="death-row-die"></div>
+
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+        </div>
+        <div class="death-row" id="death-row-3">
+            <div class="death-row-die"></div>
+
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+            <div class="death-row-notch"></div>
+        </div>
+    </div>
+
+    <div id="dice-wrapper">
+        <div id='die-0' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='die-1' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='die-2' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='die-3' class='dice'>
+            <p></p>
+        </div>
+
+        <div id='die-4' class='dice'>
+            <p></p>
+        </div>
+
+        <div class='dice-button'>
+            <p id='rollPair'>Roll</p>
+        </div>
+
+        <div class='pairs-wrapper'>
+            <div id='pair-0' class='pair'></div>
+            <div id='pair-1' class='pair'></div>
+        </div>
+
+        <label id='values'/>
+    </div>
+
+    <div id="point-rows-wrapper">
+        <div id="current-score">
+            0
+        </div>
+
+        <div id="point-row-2">
+            <div class="point-row-number">2</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+        </div>
+
+        <div id="point-row-3">
+            <div class="point-row-number">3</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+        </div>
+
+        <div id="point-row-4">
+            <div class="point-row-number">4</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+        </div>
+
+        <div id="point-row-5">
+            <div class="point-row-number">5</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+        </div>
+
+        <div id="point-row-6">
+            <div class="point-row-number">6</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+        </div>
+
+        <div id="point-row-7">
+            <div class="point-row-number">7</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-3"></div>
+            <div class="point-notch-3"></div>
+            <div class="point-notch-3"></div>
+            <div class="point-notch-3"></div>
+            <div class="point-notch-3"></div>
+        </div>
+
+        <div id="point-row-8">
+            <div class="point-row-number">8</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+            <div class="point-notch-4"></div>
+        </div>
+
+        <div id="point-row-9">
+            <div class="point-row-number">9</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+            <div class="point-notch-5"></div>
+        </div>
+
+        <div id="point-row-10">
+            <div class="point-row-number">10</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+            <div class="point-notch-6"></div>
+        </div>
+
+        <div id="point-row-11">
+            <div class="point-row-number">11</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+            <div class="point-notch-7"></div>
+        </div>
+
+        <div id="point-row-12">
+            <div class="point-row-number">12</div>
+
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-negative"></div>
+            <div class="point-notch-zero"></div>
+
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+            <div class="point-notch-10"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
